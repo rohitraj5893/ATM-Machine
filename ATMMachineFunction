@@ -1,0 +1,77 @@
+import java.util.*;
+
+public class ATMMachine {
+    public static class ATM{
+    float Balance;
+    int PIN = 4520;
+    
+   public void checkpin(){
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter Your Pin : ");
+        int enteredpin = sc.nextInt();
+        if(enteredpin==PIN) {
+            menu();
+            return;
+        }
+        else {
+            System.out.println("Wrong Entered Pin!");
+            checkpin();
+        }
+    }
+   public void menu(){
+        System.out.println("1.Withraw Money!");
+        System.out.println("2.Deposit Money!");
+        System.out.println("3.Check A/c Balance!");
+        System.out.println("4.Exit!");
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter Your Choice : ");
+        int choice = sc.nextInt();
+        
+        switch(choice){
+            case 1:
+            withrawcash();
+            break;
+            case 2:
+            depositcash();
+            break;
+            case 3:
+            checkbalace();
+            break;
+            case 4:
+            return;
+            default:
+            System.out.println("Wrong Option Selected!");
+            break;
+        }
+    }
+ public void withrawcash(){
+    Scanner sc = new Scanner(System.in);
+    System.out.print("Enter Withraw Amount : ");
+    float amount = sc.nextFloat();
+    if(amount<=Balance) {
+        Balance -= amount;
+        System.out.println("Succesfull withraw Transiction. Take a Cash from ATM Machine : " +amount);
+    }
+    else{
+        System.out.println("Insufficiant Amount in the ATM Machine!");
+    }
+    menu();
+ }
+public void depositcash(){
+    Scanner sc = new Scanner(System.in);
+    System.out.print("Enter the Deposit Amount : ");
+    float amount = sc.nextFloat();
+    Balance += amount;
+    System.out.println("Money deposited Succesfully!");
+    menu();
+}
+public void checkbalace(){
+    System.out.println("Balance in your Account : " + Balance);
+    menu();
+}
+}
+    public static void main(String[] args) {
+        ATM atm = new ATM();
+        atm.checkpin();
+    }
+}
