@@ -1,0 +1,57 @@
+import java.util.*;
+public class NumberGame {
+    public static class Game{
+     int rendomnumber;
+     int attempts;
+     int guess;
+     public void rendom(){
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter Your Rendom Number within the 1 to 100 : ");
+        rendomnumber = sc.nextInt();
+        attempts = 0;
+        if(rendomnumber>1 && rendomnumber<100){
+            guess();
+        }
+        else{
+            System.out.println("Entered Number is out of the Range. Please Try Again!");
+           rendom();
+        }
+       
+     }
+     public void guess(){
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Guess The Number : ");
+        guess = sc.nextInt();
+        if(guess==rendomnumber){
+           
+            System.out.println("Wow! You are  perfectly guess the Number.");
+            System.out.println("Are you playing again this game?");
+            System.out.println("1.Yes");
+            System.out.println("2.No");
+            int que = sc.nextInt();
+            if(que==1) rendom();
+            else return;
+        }
+        else{
+            attempts++;
+            System.out.println("Ooo! Wrong Number Guess. Please Try Again!");
+            if(attempts==3) {
+                System.out.println("Game Over!");
+                System.out.println("Are you playing again this game?");
+                System.out.println("1.Yes");
+                System.out.println("2.No");
+                int que = sc.nextInt();
+                if(que==1) rendom();
+                else return;
+            }
+            System.out.println("You have only "+ (3-attempts) + " Chance.");
+            guess();
+        }
+     }
+
+    }
+    public static void main(String[] args) {
+        Game obj = new Game();
+        obj.rendom();
+    }
+}
